@@ -244,26 +244,26 @@ int main(int argc, char* argv[]) {
     printf("]\n");
   }
 
-  float *boxes = output_tensors[0].GetTensorMutableData<float>();
-  int64_t *labels = output_tensors[1].GetTensorMutableData<int64_t>();
-  float *scores = output_tensors[2].GetTensorMutableData<float>();
-  float *masks = output_tensors[3].GetTensorMutableData<float>();
+  float* num_detection = output_data[5].GetTensorMutableData<int64_t>();
+  float* detection_boxes = output_data[1].GetTensorMutableData<float>();
+  float* detection_classes = output_data[2].GetTensorMutableData<int64_t>();
+  float* detection_scores = output_data[4].GetTensorMutableData<float>();  
 
 
-  FILE *f = fopen("boxes.data", "wb");
-  fwrite(boxes, sizeof(float), output_tensors[0].GetTensorTypeAndShapeInfo().GetElementCount(), f);
+  FILE *f = fopen("detection_boxes", "wb");
+  fwrite(boxes, sizeof(float), output_tensors[1].GetTensorTypeAndShapeInfo().GetElementCount(), f);
   fclose(f);
 
-  f = fopen("labels.data", "wb");
-  fwrite(labels, sizeof(int64_t), output_tensors[1].GetTensorTypeAndShapeInfo().GetElementCount(), f);
+  f = fopen("detection_classes", "wb");
+  fwrite(labels, sizeof(int64_t), output_tensors[2].GetTensorTypeAndShapeInfo().GetElementCount(), f);
   fclose(f);
 
-  f = fopen("scores.data", "wb");
-  fwrite(scores, sizeof(float), output_tensors[2].GetTensorTypeAndShapeInfo().GetElementCount(), f);
+  f = fopen("detection_scores", "wb");
+  fwrite(scores, sizeof(float), output_tensors[4].GetTensorTypeAndShapeInfo().GetElementCount(), f);
   fclose(f);
 
-  f = fopen("masks.data", "wb");
-  fwrite(masks, sizeof(float), output_tensors[3].GetTensorTypeAndShapeInfo().GetElementCount(), f);
+  f = fopen("num_detection", "wb");
+  fwrite(masks, sizeof(int64_t), output_tensors[5].GetTensorTypeAndShapeInfo().GetElementCount(), f);
   fclose(f);
 
 
